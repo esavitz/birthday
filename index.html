@@ -13,6 +13,7 @@
   
       /* Additional CSS styles can be added as needed */
     </style>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
   </head>
   
   <body>
@@ -22,7 +23,30 @@
     <p>This is a boilerplate HTML page.</p>
   
     <!-- Additional HTML content can be added as needed -->
+    <button id="apiButton">Call API</button>
+    <div id="responseText"></div>
   
+    <script>
+      // Function to handle the button click event
+      function handleButtonClick() {
+        const apiUrl = 'https://x5zhztmpjl.execute-api.us-east-1.amazonaws.com/test';
+  
+        // Make the API call using the Fetch API
+        axios.post(apiUrl)
+        .then(response => {
+          // Update the responseText div with the API response
+          document.getElementById('responseText').innerText = JSON.stringify(response.data);
+        })
+        .catch(error => {
+          // Handle errors, e.g., display an error message
+          document.getElementById('responseText').innerText = 'Error occurred while fetching data.';
+          console.error('Error:', error);
+        });
+      }
+  
+      // Add event listener to the button
+      document.getElementById('apiButton').addEventListener('click', handleButtonClick);
+    </script>
   </body>
   
   </html>
